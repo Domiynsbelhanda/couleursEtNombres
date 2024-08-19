@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
-Widget buildMenuButton(BuildContext context, String text, double screenHeight) {
+import '../pages/optionsPage.dart';
+
+Widget buildMenuButton(BuildContext context, String text, double screenHeight, option) {
+
+  void navigateToOption(BuildContext context, int option) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OptionPage(option: option),
+      ),
+    );
+  }
+
   return ElevatedButton(
-    onPressed: () {
-      // Action à définir pour chaque bouton
-    },
+    onPressed: () => navigateToOption(context, option),
     style: ElevatedButton.styleFrom(
       backgroundColor: const Color(0xFF5cc2ce), // Couleur turquoise des boutons
       shape: RoundedRectangleBorder(

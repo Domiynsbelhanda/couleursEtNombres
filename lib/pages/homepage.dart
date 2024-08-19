@@ -50,10 +50,10 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSpacing: screenHeight * 0.02,
                   childAspectRatio: screenWidth * 0.0047, // Maintenir un ratio d'aspect pour les boutons
                   children: [
-                    buildMenuButton(context, 'Couleurs \nde base', screenHeight),
-                    buildMenuButton(context, 'Couleurs \nrares', screenHeight),
-                    buildMenuButton(context, 'Chiffres \nde 1 à 10', screenHeight),
-                    buildMenuButton(context, 'Chiffres \nde 1 à 20', screenHeight),
+                    buildMenuButton(context, 'Couleurs \nde base', screenHeight, 1),
+                    buildMenuButton(context, 'Couleurs \nrares', screenHeight, 2),
+                    buildMenuButton(context, 'Chiffres \nde 1 à 10', screenHeight, 3),
+                    buildMenuButton(context, 'Chiffres \nde 1 à 20', screenHeight, 4),
                   ],
                 ),
               ],
