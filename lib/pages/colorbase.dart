@@ -5,7 +5,9 @@ import '../components/_background.dart';
 import '../services/datas.dart';
 
 class ColorBase extends StatefulWidget {
-  const ColorBase({super.key});
+  final int option; // 1 pour couleurs de base, 2 pour couleurs rares
+
+  const ColorBase({super.key, required this.option});
 
   @override
   _ColorBaseState createState() => _ColorBaseState();
@@ -13,10 +15,17 @@ class ColorBase extends StatefulWidget {
 
 class _ColorBaseState extends State<ColorBase> {
   int currentIndex = 0;
+  late List<ColorData> colors;
+
+  @override
+  void initState() {
+    super.initState();
+    colors = widget.option == 1 ? basicColors : rareColors;
+  }
 
   void _nextPage() {
     setState(() {
-      if (currentIndex < (basicColors.length / 2).ceil() - 1) {
+      if (currentIndex < (colors.length / 2).ceil() - 1) {
         currentIndex++;
       }
     });
@@ -48,7 +57,7 @@ class _ColorBaseState extends State<ColorBase> {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: screenHeight * 0.15),
             child: Column(
               children: [
-                                const SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'Couleurs',
                   textAlign: TextAlign.center,
@@ -60,7 +69,9 @@ class _ColorBaseState extends State<ColorBase> {
                 ),
                 SizedBox(height: screenHeight * 0.04),
                 Text(
-                  'Apprends les couleurs de base avec nous',
+                  widget.option == 1
+                      ? 'Apprends les couleurs de base avec nous'
+                      : 'Apprends les couleurs rares avec nous',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: screenHeight * 0.04,
@@ -89,7 +100,7 @@ class _ColorBaseState extends State<ColorBase> {
                       ),
                       itemBuilder: (context, index) {
                         int colorIndex = index + currentIndex * 2;
-                        if (colorIndex >= basicColors.length) return Container();
+                        if (colorIndex >= colors.length) return Container();
                         return Column(
                           children: [
                             Expanded(
@@ -97,17 +108,18 @@ class _ColorBaseState extends State<ColorBase> {
                                 width: screenHeight * 0.15,
                                 height: screenHeight * 0.15,
                                 decoration: BoxDecoration(
-                                  color: basicColors[colorIndex].color,
+                                  color: colors[colorIndex].color,
                                   shape: BoxShape.circle,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              basicColors[colorIndex].name,
+                              colors[colorIndex].name,
                               style: const TextStyle(
-                                  fontSize: 20, color: Colors.black,
-                                fontWeight: FontWeight.bold
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -120,11 +132,13 @@ class _ColorBaseState extends State<ColorBase> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_left, size: screenHeight * 0.15, color: Colors.orange),
+                      icon: Icon(Icons.arrow_left,
+                          size: screenHeight * 0.15, color: Colors.orange),
                       onPressed: _previousPage,
                     ),
                     IconButton(
-                      icon: Icon(Icons.arrow_right, size: screenHeight * 0.15, color: Colors.orange),
+                      icon: Icon(Icons.arrow_right,
+                          size: screenHeight * 0.15, color: Colors.orange),
                       onPressed: _nextPage,
                     ),
                   ],

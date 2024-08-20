@@ -1,6 +1,5 @@
 import 'package:couleursetnombres/components/_backButton.dart';
 import 'package:couleursetnombres/pages/colorbase.dart';
-import 'package:couleursetnombres/pages/colorrare.dart';
 import 'package:couleursetnombres/pages/numberPage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +13,9 @@ class OptionPage extends StatelessWidget {
   getOptionText() {
     switch (option) {
       case 1:
-        return const ColorBase();
+        return ColorBase(option: option);
       case 2:
-        return const ColorRare();
+        return ColorBase(option: option);
       case 3:
         return NumberPage(option: option);
       case 4:
