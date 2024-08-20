@@ -1,5 +1,7 @@
 // lib/datas.dart
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ColorData {
@@ -42,4 +44,34 @@ List<ColorData> rareColors = [
   ColorData(name: "Cerulean", color: Color(0xFF007BA7)),
   ColorData(name: "Moutarde", color: Color(0xFFFFDB58)),
 ];
+
+class NumberData {
+  final int number;
+  final Color color;
+
+  NumberData({required this.number, required this.color});
+}
+
+List<Color> darkColors = [
+  Colors.red,
+  Colors.deepOrange,
+  Colors.blue,
+  Colors.green,
+  Colors.purple,
+  Colors.brown,
+  Colors.teal,
+  Colors.indigo,
+  Colors.amber[800]!,
+  Colors.cyan[800]!,
+];
+
+List<NumberData> generateNumbers(int maxNumber) {
+  Random random = Random();
+  return List<NumberData>.generate(maxNumber, (index) {
+    return NumberData(
+      number: index + 1,
+      color: darkColors[random.nextInt(darkColors.length)],
+    );
+  });
+}
 

@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     buildMenuButton(context, 'Couleurs \nde base', screenHeight, 1),
                     buildMenuButton(context, 'Couleurs \nrares', screenHeight, 2),
                     buildMenuButton(context, 'Chiffres \nde 1 à 10', screenHeight, 3),
-                    buildMenuButton(context, 'Chiffres \nde 1 à 20', screenHeight, 4),
+                    buildMenuButton(context, 'Chiffres \nde 1 à 100', screenHeight, 4),
                   ],
                 ),
               ],
