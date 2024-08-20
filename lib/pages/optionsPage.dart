@@ -1,4 +1,6 @@
 import 'package:couleursetnombres/components/_backButton.dart';
+import 'package:couleursetnombres/pages/colorbase.dart';
+import 'package:couleursetnombres/pages/colorrare.dart';
 import 'package:flutter/material.dart';
 
 import '../components/_background.dart';
@@ -8,12 +10,12 @@ class OptionPage extends StatelessWidget {
 
   const OptionPage({super.key, required this.option});
 
-  String getOptionText() {
+  getOptionText() {
     switch (option) {
       case 1:
-        return 'Couleurs de base';
+        return const ColorBase();
       case 2:
-        return 'Couleurs rares';
+        return const ColorRare();
     // Ajoutez d'autres cas ici pour chaque option
       default:
         return 'Option inconnue';
@@ -61,7 +63,10 @@ class OptionPage extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Action pour "Apprendre"
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => getOptionText()),
+                              );
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
