@@ -148,8 +148,8 @@ class _ColorMatchingGameState extends State<ColorMatchingGame> {
                         },
                         builder: (context, candidateData, rejectedData) {
                           return Container(
-                            width: screenHeight * 0.15,
-                            height: screenHeight * 0.15,
+                            width: screenHeight * 0.13,
+                            height: screenHeight * 0.13,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: currentChoices[index].color,
@@ -177,8 +177,8 @@ class _ColorMatchingGameState extends State<ColorMatchingGame> {
                 Draggable<ColorData>(
                   data: targetColor,
                   feedback: Container(
-                    width: screenHeight * 0.15,
-                    height: screenHeight * 0.15,
+                    width: screenHeight * 0.11,
+                    height: screenHeight * 0.11,
                     decoration: BoxDecoration(
                       color: targetColor.color,
                       shape: BoxShape.circle,
@@ -186,8 +186,8 @@ class _ColorMatchingGameState extends State<ColorMatchingGame> {
                   ),
                   childWhenDragging: Container(),
                   child: Container(
-                    width: screenHeight * 0.15,
-                    height: screenHeight * 0.15,
+                    width: screenHeight * 0.13,
+                    height: screenHeight * 0.13,
                     decoration: BoxDecoration(
                       color: targetColor.color,
                       shape: BoxShape.circle,

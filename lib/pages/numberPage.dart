@@ -88,8 +88,8 @@ class _NumberPageState extends State<NumberPage> {
                           return Column(
                             children: [
                               Container(
-                                width: screenHeight * 0.15,
-                                height: screenHeight * 0.15,
+                                width: screenHeight * 0.12,
+                                height: screenHeight * 0.12,
                                 decoration: BoxDecoration(
                                   color: numbers[numberIndex].color,
                                   shape: BoxShape.circle,
@@ -98,7 +98,7 @@ class _NumberPageState extends State<NumberPage> {
                                   child: Text(
                                     numbers[numberIndex].number.toString(),
                                     style: TextStyle(
-                                      fontSize: screenHeight * 0.08,
+                                      fontSize: screenHeight * 0.06,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),

@@ -26,7 +26,7 @@ Widget buildMenuButton(BuildContext context, String text, double screenHeight, o
       text,
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: screenHeight * 0.03,
+        fontSize: screenHeight * 0.025,
         color: Colors.white,
       ),
       softWrap: true, // Permet le retour à la ligne

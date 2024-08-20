@@ -79,32 +79,41 @@ class _ColorBaseState extends State<ColorBase> {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.04),
-                Expanded(
-                  child: GestureDetector(
-                    onHorizontalDragEnd: (details) {
-                      if (details.primaryVelocity! < 0) {
-                        // Swiped Left
-                        _nextPage();
-                      } else if (details.primaryVelocity! > 0) {
-                        // Swiped Right
-                        _previousPage();
-                      }
-                    },
-                    child: GridView.builder(
-                      itemCount: 2,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.5,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 5,
-                      ),
-                      itemBuilder: (context, index) {
-                        int colorIndex = index + currentIndex * 2;
-                        if (colorIndex >= colors.length) return Container();
-                        return Column(
-                          children: [
-                            Expanded(
-                              child: Container(
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(top: screenHeight / 1.7),
+            child: SizedBox(
+                height: screenHeight * 0.5,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onHorizontalDragEnd: (details) {
+                        if (details.primaryVelocity! < 0) {
+                          // Swiped Left
+                          _nextPage();
+                        } else if (details.primaryVelocity! > 0) {
+                          // Swiped Right
+                          _previousPage();
+                        }
+                      },
+                      child: GridView.builder(
+                        itemCount: 2,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1,
+                          mainAxisSpacing: screenHeight * 0.05,
+                          crossAxisSpacing: 0,
+                        ),
+                        itemBuilder: (context, index) {
+                          int colorIndex = index + currentIndex * 2;
+                          if (colorIndex >= colors.length) return Container();
+                          return Column(
+                            children: [
+                              Container(
                                 width: screenHeight * 0.15,
                                 height: screenHeight * 0.15,
                                 decoration: BoxDecoration(
@@ -112,38 +121,38 @@ class _ColorBaseState extends State<ColorBase> {
                                   shape: BoxShape.circle,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              colors[colorIndex].name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                              const SizedBox(height: 5),
+                              Text(
+                                colors[colorIndex].name,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_left,
-                          size: screenHeight * 0.15, color: Colors.orange),
-                      onPressed: _previousPage,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_right,
-                          size: screenHeight * 0.15, color: Colors.orange),
-                      onPressed: _nextPage,
-                    ),
-                  ],
-                ),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_left,
+                            size: screenHeight * 0.15, color: Colors.orange),
+                        onPressed: _previousPage,
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_right,
+                            size: screenHeight * 0.15, color: Colors.orange),
+                        onPressed: _nextPage,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

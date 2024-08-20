@@ -149,8 +149,8 @@ class _NumberMatchingGameState extends State<NumberMatchingGame> {
                         },
                         builder: (context, candidateData, rejectedData) {
                           return Container(
-                            width: screenHeight * 0.15,
-                            height: screenHeight * 0.15,
+                            width: screenHeight * 0.14,
+                            height: screenHeight * 0.14,
                             decoration: BoxDecoration(
                               color: _getRandomColor(), // Couleur aléatoire
                               shape: BoxShape.circle,
@@ -189,9 +189,9 @@ class _NumberMatchingGameState extends State<NumberMatchingGame> {
                 Draggable<int>(
                   data: targetNumber,
                   feedback: Container(
-                    width: screenHeight * 0.15,
-                    height: screenHeight * 0.15,
-                    decoration: BoxDecoration(
+                    width: screenHeight * 0.13,
+                    height: screenHeight * 0.13,
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                       shape: BoxShape.circle,
                     ),
@@ -210,7 +210,7 @@ class _NumberMatchingGameState extends State<NumberMatchingGame> {
                   child: Container(
                     width: screenHeight * 0.15,
                     height: screenHeight * 0.15,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                       shape: BoxShape.circle,
                     ),

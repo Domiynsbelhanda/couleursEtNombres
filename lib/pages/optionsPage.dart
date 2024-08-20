@@ -89,7 +89,7 @@ class OptionPage extends StatelessWidget {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015, horizontal: screenHeight * 0.015),
                               decoration: BoxDecoration(
                                 color: Colors.orange,
                                 borderRadius: BorderRadius.circular(20),
@@ -109,7 +109,7 @@ class OptionPage extends StatelessWidget {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015, horizontal: screenHeight * 0.015),
                               decoration: BoxDecoration(
                                 color: Colors.orange,
                                 borderRadius: BorderRadius.circular(20),
