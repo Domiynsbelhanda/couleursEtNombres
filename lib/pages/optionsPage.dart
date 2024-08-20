@@ -1,9 +1,11 @@
 import 'package:couleursetnombres/components/_backButton.dart';
 import 'package:couleursetnombres/pages/colorbase.dart';
 import 'package:couleursetnombres/pages/numberPage.dart';
+import 'package:couleursetnombres/pages/numbermatchinggame.dart';
 import 'package:flutter/material.dart';
 
 import '../components/_background.dart';
+import 'colormatchinggame.dart';
 
 class OptionPage extends StatelessWidget {
   final int option;
@@ -20,6 +22,21 @@ class OptionPage extends StatelessWidget {
         return NumberPage(option: option);
       case 4:
         return NumberPage(option: option);
+      default:
+        return 'Option inconnue';
+    }
+  }
+
+  getOptionGame() {
+    switch (option) {
+      case 1:
+        return ColorMatchingGame(option: option);
+      case 2:
+        return ColorMatchingGame(option: option);
+      case 3:
+        return NumberMatchingGame(option: option);
+      case 4:
+        return NumberMatchingGame(option: option);
       default:
         return 'Option inconnue';
     }
@@ -86,7 +103,10 @@ class OptionPage extends StatelessWidget {
                           const SizedBox(width: 20),
                           GestureDetector(
                             onTap: () {
-                              // Action pour "Jouer"
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => getOptionGame()),
+                              );
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
