@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';  // Import du package audioplayers
 import '../components/_backButton.dart';
 import '../components/_background.dart';
 import '../services/datas.dart';
@@ -21,6 +22,7 @@ class _ColorMatchingGameState extends State<ColorMatchingGame> {
   int attempts = 0;
   bool isCorrect = false;
   int? selectedIndex;
+  final AudioPlayer _audioPlayer = AudioPlayer(); // Initialisation de l'audio player
 
   @override
   void initState() {
@@ -42,13 +44,17 @@ class _ColorMatchingGameState extends State<ColorMatchingGame> {
     isCorrect = false;
   }
 
-  void _checkMatch(ColorData selectedColor, int index) {
+  void _checkMatch(ColorData selectedColor, int index) async {
     setState(() {
       if (selectedColor == targetColor) {
         score++;
         isCorrect = true;
+        // Joue le son correct (tin)
+        _audioPlayer.play(AssetSource('son/tin.mp3'));
       } else {
         isCorrect = false;
+        // Joue le son incorrect (ton)
+        _audioPlayer.play(AssetSource('son/ton.mp3'));
       }
       selectedIndex = index;
     });

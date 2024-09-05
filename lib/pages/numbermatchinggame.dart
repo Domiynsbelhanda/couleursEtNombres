@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -21,6 +22,8 @@ class _NumberMatchingGameState extends State<NumberMatchingGame> {
   int attempts = 0;
   bool isCorrect = false;
   int? selectedIndex;
+
+  final AudioPlayer _audioPlayer = AudioPlayer(); // Initialisation de l'audio player
 
   @override
   void initState() {
@@ -47,8 +50,10 @@ class _NumberMatchingGameState extends State<NumberMatchingGame> {
       if (selectedNumber == targetNumber) {
         score++;
         isCorrect = true;
+        _audioPlayer.play(AssetSource('son/tin.mp3'));
       } else {
         isCorrect = false;
+        _audioPlayer.play(AssetSource('son/ton.mp3'));
       }
       selectedIndex = index;
     });

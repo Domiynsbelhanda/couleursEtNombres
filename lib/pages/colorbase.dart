@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../components/_backButton.dart';
 import '../components/_background.dart';
@@ -16,11 +17,24 @@ class ColorBase extends StatefulWidget {
 class _ColorBaseState extends State<ColorBase> {
   int currentIndex = 0;
   late List<ColorData> colors;
+  late FlutterTts flutterTts;
 
   @override
   void initState() {
     super.initState();
     colors = widget.option == 1 ? basicColors : rareColors;
+    flutterTts = FlutterTts();
+    _initTts();
+  }
+
+  Future<void> _initTts() async {
+    await flutterTts.setLanguage("fr-FR"); // Définit la langue en français
+    await flutterTts.setSpeechRate(0.5);   // Ajuste la vitesse de parole (0.5 est une valeur assez naturelle)
+    await flutterTts.setPitch(1.5);        // Ajuste la hauteur de la voix (1.5 est plus aiguë, semblable à une enfant)
+  }
+
+  Future<void> _speak(String text) async {
+    await flutterTts.speak(text);
   }
 
   void _nextPage() {
@@ -86,18 +100,16 @@ class _ColorBaseState extends State<ColorBase> {
           Padding(
             padding: EdgeInsets.only(top: screenHeight / 1.7),
             child: SizedBox(
-                height: screenHeight * 0.5,
+              height: screenHeight * 0.5,
               child: Column(
                 children: [
                   Expanded(
                     child: GestureDetector(
                       onHorizontalDragEnd: (details) {
                         if (details.primaryVelocity! < 0) {
-                          // Swiped Left
-                          _nextPage();
+                          _nextPage(); // Swiped Left
                         } else if (details.primaryVelocity! > 0) {
-                          // Swiped Right
-                          _previousPage();
+                          _previousPage(); // Swiped Right
                         }
                       },
                       child: GridView.builder(
@@ -111,26 +123,31 @@ class _ColorBaseState extends State<ColorBase> {
                         itemBuilder: (context, index) {
                           int colorIndex = index + currentIndex * 2;
                           if (colorIndex >= colors.length) return Container();
-                          return Column(
-                            children: [
-                              Container(
-                                width: screenHeight * 0.15,
-                                height: screenHeight * 0.15,
-                                decoration: BoxDecoration(
-                                  color: colors[colorIndex].color,
-                                  shape: BoxShape.circle,
+                          return GestureDetector(
+                            onTap: () {
+                              _speak(colors[colorIndex].name); // Prononce la couleur
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: screenHeight * 0.15,
+                                  height: screenHeight * 0.15,
+                                  decoration: BoxDecoration(
+                                    color: colors[colorIndex].color,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                colors[colorIndex].name,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                                const SizedBox(height: 5),
+                                Text(
+                                  colors[colorIndex].name,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
                       ),

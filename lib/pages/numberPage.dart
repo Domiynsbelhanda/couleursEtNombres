@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';  // Import du package TTS
 
 import '../components/_backButton.dart';
 import '../components/_background.dart';
@@ -16,6 +17,24 @@ class NumberPage extends StatefulWidget {
 class _NumberPageState extends State<NumberPage> {
   late List<NumberData> numbers;
   final PageController _pageController = PageController();
+  final FlutterTts flutterTts = FlutterTts();  // Création d'une instance de FlutterTts
+
+  @override
+  void initState() {
+    super.initState();
+    numbers = generateNumbers(widget.option == 3 ? 10 : 100);
+    _initTts();  // Initialisation de FlutterTts
+  }
+
+  Future<void> _initTts() async {
+    await flutterTts.setLanguage("fr-FR");  // Définit la langue en français
+    await flutterTts.setSpeechRate(0.5);    // Vitesse modérée de la parole
+    await flutterTts.setPitch(1.5);         // Hauteur de voix plus aiguë
+  }
+
+  void _speak(String number) async {
+    await flutterTts.speak(number);  // Prononce le numéro en français
+  }
 
   void _nextPage() {
     if (_pageController.page! < (numbers.length / 2).ceil() - 1) {
@@ -27,12 +46,6 @@ class _NumberPageState extends State<NumberPage> {
     if (_pageController.page! > 0) {
       _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    numbers = generateNumbers(widget.option == 3 ? 10 : 100);
   }
 
   @override
@@ -85,36 +98,41 @@ class _NumberPageState extends State<NumberPage> {
                         children: List.generate(2, (index) {
                           int numberIndex = pageIndex * 2 + index;
                           if (numberIndex >= numbers.length) return Container();
-                          return Column(
-                            children: [
-                              Container(
-                                width: screenHeight * 0.12,
-                                height: screenHeight * 0.12,
-                                decoration: BoxDecoration(
-                                  color: numbers[numberIndex].color,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    numbers[numberIndex].number.toString(),
-                                    style: TextStyle(
-                                      fontSize: screenHeight * 0.06,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                          return GestureDetector(
+                            onTap: () {
+                              _speak(numbers[numberIndex].number.toString());  // Prononce le numéro lors du clic
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: screenHeight * 0.12,
+                                  height: screenHeight * 0.12,
+                                  decoration: BoxDecoration(
+                                    color: numbers[numberIndex].color,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      numbers[numberIndex].number.toString(),
+                                      style: TextStyle(
+                                        fontSize: screenHeight * 0.06,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                numbers[numberIndex].number.toString(),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                                const SizedBox(height: 5),
+                                Text(
+                                  numbers[numberIndex].number.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         }),
                       );
